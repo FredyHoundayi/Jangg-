@@ -8,6 +8,10 @@ WORKDIR /app
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV GROQ_API_KEY=""
+ENV OPENAI_API_KEY=""
+ENV DATABASE_URL="sqlite:///./brain_platform.db"
+ENV ENVIRONMENT="production"
 
 # Install system dependencies
 RUN apt-get update \
