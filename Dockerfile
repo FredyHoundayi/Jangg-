@@ -1,7 +1,7 @@
 # Use Python 3.12 slim image
 FROM python:3.12-slim
 
-# Set working directory0.0.0", "--port", "8000"]
+# Set working directory
 
 WORKDIR /app
 
@@ -22,7 +22,7 @@ RUN apt-get update \
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip \
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
