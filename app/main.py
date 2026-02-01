@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 
-from app.routers import chat, quiz, audio
+from app.routers import chat, quiz, audio, video, integrated
 
 app = FastAPI(title="JANGG AI API", description="Intelligent API for interactive learning with AI")
 
@@ -11,6 +11,8 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(chat.router)
 app.include_router(quiz.router)
 app.include_router(audio.router)
+app.include_router(video.router)
+app.include_router(integrated.router)
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
@@ -70,6 +72,31 @@ async def root():
         <div class="endpoint">
             <span class="method">POST</span> <span class="path">/audio/speech-to-text</span>
             <div class="description">Convert speech to text</div>
+        </div>
+        
+        <div class="endpoint">
+            <span class="method">POST</span> <span class="path">/video/generate</span>
+            <div class="description">Generate course videos with AI images and text-to-speech</div>
+        </div>
+        
+        <div class="endpoint">
+            <span class="method">GET</span> <span class="path">/video/health</span>
+            <div class="description">Check video generation service status</div>
+        </div>
+        
+        <div class="endpoint">
+            <span class="method">POST</span> <span class="path">/integrated/complete-course</span>
+            <div class="description">Generate complete learning package (course + quiz + video scenes) in one LLM call</div>
+        </div>
+        
+        <div class="endpoint">
+            <span class="method">POST</span> <span class="path">/integrated/video-from-scenes</span>
+            <div class="description">Generate video from pre-generated scenes</div>
+        </div>
+        
+        <div class="endpoint">
+            <span class="method">POST</span> <span class="path">/integrated/full-pipeline</span>
+            <div class="description">Complete pipeline: generate content AND create video in one call</div>
         </div>
         
         <div style="text-align: center; margin-top: 30px;">
